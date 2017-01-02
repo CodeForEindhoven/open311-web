@@ -1,0 +1,71 @@
+.button {
+	padding: 20px;
+	border-bottom: 1px solid #CCCCCC;
+	cursor: pointer;
+}
+
+.button .material-icons {
+	vertical-align: middle;
+	margin-right: 15px;
+}
+
+span.selected {
+	color: #e2bb5f;
+}
+
+
+.button .list {
+
+}
+
+.button .list .listelem.show{
+	max-height: 50px;
+	padding: 10px;
+}
+
+
+.button .list .listelem {
+	padding-left: 10px;
+	max-height: 0px;
+	overflow: hidden;
+	transition: max-height 0.5s, padding 0.5s;
+}
+
+.button .list .listelem:hover {
+	background-color: #DDDDDD;
+}
+
+
+.description textarea {
+	border-style: none;
+	border-color: Transparent;
+	resize: vertical;
+	width: 100%;
+	height: 150px;
+	border-bottom: 1px solid #CCCCCC;
+	outline: none !important;
+	padding-top: 20px;
+	transition: all 0.2s ease-in-out;
+	font-family: 'Nunito Sans', sans-serif;
+	cursor: pointer;
+}
+
+.description textarea:focus {
+	border-bottom: 2px solid #e2bb5f;
+	cursor: auto;
+}
+
+.description span {
+	margin-top: 20px;
+	margin-left: 20px;
+	position: absolute;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.description span.selected {
+	font-size: 8pt;
+	margin-top: 2px;
+	margin-left: 0px;
+	color: #e2bb5f;
+}
