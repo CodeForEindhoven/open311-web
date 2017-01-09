@@ -1,15 +1,16 @@
-var PLStyle = {
-};
+var PickLocation = (function(){
 
-var PickLocation = {
-	controller: function(){
-	},
-	view: function(ctrl){
-		return m.component(InputPanel, {
-			icon: "location_on",
-			label: "Kies een locatie",
-			content: [
-			]
-		});
-	}
-};
+	return {
+		controller: function(){
+		},
+		view: function(ctrl){
+			return m.component(InputPanel, {
+				icon: "location_on",
+				label: "Kies een locatie",
+				content: [
+				]
+			});
+		}
+	};
+
+})();
