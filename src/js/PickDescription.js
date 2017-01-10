@@ -6,7 +6,7 @@ var PickDescription = (function(){
 			"resize": "vertical",
 
 			"font-family": "'Nunito Sans', sans-serif",
-			"font-size": "14pt",
+			"font-size": "12pt",
 
 			"cursor": "pointer",
 
@@ -17,7 +17,7 @@ var PickDescription = (function(){
 	};
 
 	return {
-		controller: function(){
+		controller: function(callback){
 			var focus = false;
 			var value = "";
 			var textarea;
@@ -27,7 +27,10 @@ var PickDescription = (function(){
 
 				onfocus: function(){focus = true; textarea.focus();},
 				onblur: function(){if(value === "")focus = false;},
-				onchange: function(e){value = e.target.value;},
+				onchange: function(e){
+					value = e.target.value;
+					callback(value);
+				},
 				config: function(e){textarea = e;}
 			};
 		},

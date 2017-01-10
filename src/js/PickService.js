@@ -22,7 +22,7 @@ var PickService = (function(){
 	};
 
 	return {
-		controller: function(){
+		controller: function(callback){
 			var services = open311.services();
 			var selection = -1;
 			var opened = false;
@@ -37,7 +37,10 @@ var PickService = (function(){
 					opened = !opened;
 				},
 				onselect: function(code){
-					return function(){selection = code;};
+					return function(){
+						selection = code;
+						callback(services[selection].service_code);
+					};
 				},
 			};
 		},
