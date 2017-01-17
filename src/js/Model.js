@@ -24,29 +24,35 @@ var open311 = (function() {
 
 	model.postRequest = function(form){
 		model.uploadImage(form, function(image){
-			var formData = new FormData();
-			formData.append("api_key", api_key);
-			formData.append("service_code", form.service_code || -1);
-			formData.append("email", form.email || "");
-			formData.append("first_name", form.first_name || "");
-			formData.append("lat", form.lat || 0.0);
-			formData.append("long", form.lng || 0.0);
-			formData.append("description", form.description || "");
-			formData.append("media", image.path || {});
+			form.media = image.path;
+			model.uploadForm(form, function(){});
+		});
+	};
 
-			m.request({
-				method: "POST",
-				url: endpoint + "requests.json",
-				data: formData,
-				serialize: function(value) {
-					return value;
-				}
-			}).then(function(data) {
-				console.log("Post success");
-				console.log(data);
-			}, function(error) {
-				console.log(error);
-			});
+	model.uploadForm = function(form, callback){
+		var formData = new FormData();
+		formData.append("api_key", api_key);
+		formData.append("service_code", form.service_code || -1);
+		formData.append("email", form.email || "");
+		formData.append("first_name", form.first_name || "");
+		formData.append("lat", form.lat || 0.0);
+		formData.append("long", form.lng || 0.0);
+		formData.append("description", form.description || "");
+		formData.append("media", form.media || {});
+
+		m.request({
+			method: "POST",
+			url: endpoint + "requests.json",
+			data: formData,
+			serialize: function(value) {
+				return value;
+			}
+		}).then(function(data) {
+			console.log("Post success");
+			console.log(data);
+			callback(data);
+		}, function(error) {
+			console.log(error);
 		});
 	};
 
