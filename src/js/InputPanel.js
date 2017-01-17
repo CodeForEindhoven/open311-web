@@ -2,6 +2,7 @@ var InputPanel = (function(){
 	var style = {
 		main: s.cl({
 			"padding": "20px",
+			"padding-right": "0px",
 			"border-bottom": "1px solid #CCCCCC",
 			"cursor": "pointer",
 		}),

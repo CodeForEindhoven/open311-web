@@ -11,6 +11,10 @@ body {
 	margin-top: 10px;
 }
 
+input.file {
+	display: none;
+}
+
 @media only screen and (max-width: 680px) {
 	.page {
 		width: 100%;

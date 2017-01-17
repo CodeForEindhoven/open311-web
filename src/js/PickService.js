@@ -2,7 +2,7 @@ var PickService = (function(){
 
 	var style = {
 		listelem : s.cl({
-			"padding-left": "10px",
+			"padding-left": "15px",
 			"max-height": "0px",
 			"overflow": "hidden",
 			"transition": "all 0.5s, padding 0.5s",

@@ -8,6 +8,7 @@ var HoverButton = (function(){
 
 			"float": "right",
 			"margin-top": "20px",
+			"margin-bottom": "20px",
 
 			"background-color": "#E32527",
 			"color": "#fff",
