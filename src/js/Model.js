@@ -22,10 +22,12 @@ var open311 = (function() {
 	model.requests = m.prop([]);
 	model.services = m.prop([]);
 
-	model.postRequest = function(form){
+	model.postRequest = function(form, callback){
 		model.uploadImage(form, function(image){
-			form.media = image.path;
-			model.uploadForm(form, function(){});
+			if(image) form.media = image.path;
+			model.uploadForm(form, function(data){
+				callback(data);
+			});
 		});
 	};
 
@@ -57,23 +59,28 @@ var open311 = (function() {
 	};
 
 	model.uploadImage = function(form, callback){
-		var formData = new FormData();
-		formData.append("media", form.image || []);
+		if(form.image){
+			var formData = new FormData();
+			formData.append("media", form.image || []);
 
-		m.request({
-			method: "POST",
-			url: uploadEndpoint,
-			data: formData,
-			serialize: function(value) {
-				return value;
-			}
-		}).then(function(data) {
-			console.log("Post success");
-			console.log(data);
-			callback(data);
-		}, function(error) {
-			console.log(error);
-		});
+			m.request({
+				method: "POST",
+				url: uploadEndpoint,
+				data: formData,
+				serialize: function(value) {
+					return value;
+				}
+			}).then(function(data) {
+				console.log("Post success");
+				console.log(data);
+				callback(data);
+			}, function(error) {
+				console.log(error);
+			});
+		} else {
+			callback();
+		}
+
 	};
 
 	GET("services.json").then(model.services);
