@@ -34,7 +34,7 @@ var PickDescription = (function(){
 				config: function(e){textarea = e;}
 			};
 		},
-		view: function(ctrl){
+		view: function(ctrl, value){
 			return m.component(InputPanel, {
 				icon: "edit",
 				label: "Geef een beschrijving",
@@ -42,6 +42,7 @@ var PickDescription = (function(){
 				onclick: ctrl.onfocus,
 				content: [
 					m("textarea", {
+						value: value(),
 						class: style.textarea,
 						onfocus: ctrl.onfocus,
 						onblur: ctrl.onblur,

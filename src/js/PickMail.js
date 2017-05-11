@@ -37,7 +37,7 @@ var PickMail = (function(){
 				config: function(e){textarea = e;}
 			};
 		},
-		view: function(ctrl){
+		view: function(ctrl, value){
 			return m.component(InputPanel, {
 				icon: "email",
 				label: "Email",
@@ -45,6 +45,7 @@ var PickMail = (function(){
 				onclick: ctrl.onfocus,
 				content: [
 					m("input", {
+						value: value(),
 						class: style.input +" "+ (ctrl.focus()?style.hiddeninput:""),
 						onfocus: ctrl.onfocus,
 						onblur: ctrl.onblur,

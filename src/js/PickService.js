@@ -22,36 +22,43 @@ var PickService = (function(){
 	};
 
 	return {
-		controller: function(callback){
+		controller: function(callback) {
 			var services = open311.services();
-			var selection = -1;
 			var opened = false;
+
 			return {
+				selected: function(selection){
+					return (selection !== -1);
+				},
+				servicename: function(selection){
+					return services[selection].service_name;
+				},
 				services: function(){return services;},
-				selected: function(){return selection !== -1;},
-				selection: function(){return services[selection].service_name;},
+
 				opened: function(){return opened;},
 
 				onclick: function(){
-					if(!opened) selection = -1;
+					if(!opened) callback({});
 					opened = !opened;
 				},
+
 				onselect: function(code){
 					return function(){
-						selection = code;
-						callback(services[selection].service_code);
+						callback(services[code]);
 					};
 				},
 			};
 		},
-		view: function(ctrl){
+		view: function(ctrl, selection) {
+			console.log(selection());
+
 			return m.component(InputPanel, {
 				icon: "business",
 				label: "Selecteer een categorie",
-				selected: ctrl.selected(),
+				selected: ctrl.selected(selection().service_code),
 				onclick: ctrl.onclick,
 				content: [
-					m("div", {}, ctrl.selected()? ctrl.selection(): ""),
+					m("div", {}, ctrl.selected(selection().service_code) ? selection().service_name: ""),
 					ctrl.services().map(function(s, count){
 						return m("div",{
 							class: (ctrl.opened() ? style.listelem+" "+style.show : style.listelem),

@@ -32,12 +32,12 @@ var PickName = (function(){
 				onblur: function(){if(value === "")focus = false;},
 				onchange: function(e){
 					value = e.target.value;
-					callback(value);s
+					callback(value);
 				},
 				config: function(e){textarea = e;}
 			};
 		},
-		view: function(ctrl){
+		view: function(ctrl, value){
 			return m.component(InputPanel, {
 				icon: "person",
 				label: "Naam",
@@ -45,6 +45,7 @@ var PickName = (function(){
 				onclick: ctrl.onfocus,
 				content: [
 					m("input", {
+						value: value(),
 						class: style.input +" "+ (ctrl.focus()?style.hiddeninput:""),
 						onfocus: ctrl.onfocus,
 						onblur: ctrl.onblur,
