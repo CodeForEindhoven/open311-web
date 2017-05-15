@@ -51,6 +51,7 @@ var Popup = (function(){
 					m("button", {
 						class: style.button,
 						onclick: function(){
+							m.route("/");
 							popupMessage = "";
 						}
 					}, "ok")

@@ -22,11 +22,6 @@ var Form = {
 					email: mail()
 				}, function(response){
 					showPopup(response[0].service_notice);
-					service_code(-1);
-					description("");
-					image();
-					name("");
-					mail("");
 				});
 			}
 		};
