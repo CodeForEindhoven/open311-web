@@ -1,7 +1,7 @@
 var PickImage = (function(){
 
 	var style = {
-		img: s.cl({
+		img: b.cl({
 			"width": "100%"
 		})
 	};
@@ -10,8 +10,11 @@ var PickImage = (function(){
 		controller: function(callback){
 			var file;
 			var dataUrl = "";
+			var correct = false;
 
 			return {
+				correct: function(){return correct;},
+
 				file: function(){return file;},
 				dataUrl: function(){return dataUrl;},
 
@@ -24,6 +27,13 @@ var PickImage = (function(){
 					input.addEventListener("change", function(){
 						var reader = new FileReader();
 						file = input.files[0];
+
+						if(file !== undefined){
+							correct = true;
+						} else {
+							correct = false;
+						}
+
 						callback(file);
 
 						reader.onload = function(e) {
@@ -46,10 +56,11 @@ var PickImage = (function(){
 			return m.component(InputPanel, {
 				icon: "photo",
 				label: "Kies een afbeelding",
-				selected: (ctrl.file() !== undefined),
+				selected: ctrl.correct(),
+				correct: ctrl.correct(),
 				onclick: ctrl.onclick,
 				content: (function(){
-					if(ctrl.file() !== undefined){
+					if(ctrl.correct()){
 						return m("img", {class: style.img,src: ctrl.dataUrl()});
 					}
 				})()

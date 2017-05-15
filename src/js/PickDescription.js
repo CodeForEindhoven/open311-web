@@ -1,6 +1,6 @@
 var PickDescription = (function(){
 	var style = {
-		textarea: s.cl({
+		textarea: b.cl({
 			"width": "100%",
 			"height": "150px",
 			"resize": "vertical",
@@ -21,14 +21,17 @@ var PickDescription = (function(){
 			var focus = false;
 			var value = "";
 			var textarea;
+			var correct = false;
 
 			return {
 				focus: function(){return focus;},
+				correct: function(){return correct;},
 
 				onfocus: function(){focus = true; textarea.focus();},
 				onblur: function(){if(value === "")focus = false;},
 				onchange: function(e){
 					value = e.target.value;
+					if(value !== "") correct = true; else correct = false;
 					callback(value);
 				},
 				config: function(e){textarea = e;}
@@ -39,6 +42,7 @@ var PickDescription = (function(){
 				icon: "edit",
 				label: "Geef een beschrijving",
 				selected: ctrl.focus(),
+				correct: ctrl.correct(),
 				onclick: ctrl.onfocus,
 				content: [
 					m("textarea", {

@@ -1,6 +1,6 @@
 var PickMail = (function(){
 	var style = {
-		input: s.cl({
+		input: b.cl({
 			"width": "100%",
 			//"height": "150px",
 
@@ -14,24 +14,37 @@ var PickMail = (function(){
 			"outline": "none !important",
 			"display": "none"
 		}),
-		hiddeninput: s.cl({
+		hiddeninput: b.cl({
 			"display": "inline-block !important"
 		})
 	};
 
 	return {
 		controller: function(callback){
+			function validateEmail(email) {
+				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
+			}
+
 			var focus = false;
 			var value = "";
 			var textarea;
+			var correct = false;
 
 			return {
 				focus: function(){return focus;},
+				correct: function(){return correct;},
 
 				onfocus: function(){focus = true; window.setTimeout(function(){textarea.focus();}, 500);},
 				onblur: function(){if(value === "")focus = false;},
 				onchange: function(e){
 					value = e.target.value;
+					if(validateEmail(value)){
+						correct = true;
+					} else {
+						correct = false;
+					}
+
 					callback(value);
 				},
 				config: function(e){textarea = e;}
@@ -40,8 +53,9 @@ var PickMail = (function(){
 		view: function(ctrl){
 			return m.component(InputPanel, {
 				icon: "email",
-				label: "Email",
+				label: "Geef je email adres",
 				selected: ctrl.focus(),
+				correct: ctrl.correct(),
 				onclick: ctrl.onfocus,
 				content: [
 					m("input", {

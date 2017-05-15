@@ -32,7 +32,7 @@ var Form = {
 			m.component(PickMail, ctrl.mail),
 			m.component(PickService, ctrl.service_code),
 			m.component(PickDescription, ctrl.description),
-			//m.component(PickLocation),
+			m.component(PickLocation),
 			m.component(PickImage, ctrl.image),
 			m.component(HoverButton, {
 				onclick: ctrl.post

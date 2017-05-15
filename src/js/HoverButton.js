@@ -1,7 +1,7 @@
 var HoverButton = (function(){
 
 	var style = {
-		main: s.cl({
+		main: b.cl({
 			"width": "50px",
 			"height": "50px",
 			"border-radius": "25px",
@@ -19,7 +19,7 @@ var HoverButton = (function(){
 
 			"cursor": "pointer",
 		}),
-		icon: s.cl({
+		icon: b.cl({
 			"vertical-align": "middle"
 		})
 	};

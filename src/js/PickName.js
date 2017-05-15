@@ -1,6 +1,6 @@
 var PickName = (function(){
 	var style = {
-		input: s.cl({
+		input: b.cl({
 			"width": "100%",
 			//"height": "150px",
 
@@ -14,7 +14,7 @@ var PickName = (function(){
 			"outline": "none !important",
 			"display": "none"
 		}),
-		hiddeninput: s.cl({
+		hiddeninput: b.cl({
 			"display": "inline-block !important"
 		})
 	};
@@ -24,15 +24,22 @@ var PickName = (function(){
 			var focus = false;
 			var value = "";
 			var textarea;
+			var correct = false;
 
 			return {
 				focus: function(){return focus;},
+				correct: function(){return correct;},
 
 				onfocus: function(){focus = true; window.setTimeout(function(){textarea.focus();}, 500);},
 				onblur: function(){if(value === "")focus = false;},
 				onchange: function(e){
 					value = e.target.value;
-					callback(value);s
+					if(value.length > 0 ){
+						correct = true;
+					} else {
+						correct = false;
+					}
+					callback(value);
 				},
 				config: function(e){textarea = e;}
 			};
@@ -40,8 +47,9 @@ var PickName = (function(){
 		view: function(ctrl){
 			return m.component(InputPanel, {
 				icon: "person",
-				label: "Naam",
+				label: "Voer je naam in",
 				selected: ctrl.focus(),
+				correct: ctrl.correct(),
 				onclick: ctrl.onfocus,
 				content: [
 					m("input", {

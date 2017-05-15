@@ -1,21 +1,27 @@
 var PickService = (function(){
 
 	var style = {
-		listelem : s.cl({
+		listelem : b.cl({
 			"padding-left": "15px",
 			"max-height": "0px",
 			"overflow": "hidden",
 			"transition": "all 0.5s, padding 0.5s",
+		},{
+			":hover": {
+				"background-color": "#DDDDDD",
+			}
 		}),
-		show : s.cl({
+
+		show : b.cl({
 			"max-height": "70px!important",
 			"padding": "10px!important",
 		}),
 
-		service_name: s.cl({
+		service_name: b.cl({
 			"font-weight" :"bold"
 		}),
-		description: s.cl({
+
+		description: b.cl({
 			"font-size": "10pt",
 			"color": "#888888"
 		})
@@ -49,6 +55,7 @@ var PickService = (function(){
 				icon: "business",
 				label: "Selecteer een categorie",
 				selected: ctrl.selected(),
+				correct: ctrl.selected(),
 				onclick: ctrl.onclick,
 				content: [
 					m("div", {}, ctrl.selected()? ctrl.selection(): ""),

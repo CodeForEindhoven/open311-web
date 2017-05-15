@@ -1,6 +1,6 @@
 var MenuBar = (function(){
 
-	var style = s.cl({
+	var style = b.cl({
 		//shape
 		"box-sizing": "border-box",
 		"height": "70px",
